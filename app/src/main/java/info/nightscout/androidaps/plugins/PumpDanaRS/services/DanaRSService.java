@@ -526,6 +526,8 @@ public class DanaRSService extends Service {
             log.debug("EventAppExit received");
 
         stopSelf();
+        if (L.isEnabled(L.PUMP))
+            log.debug("EventAppExit finished");
     }
 
     void waitForWholeMinute() {

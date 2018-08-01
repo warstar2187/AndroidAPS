@@ -698,7 +698,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                     .duration(trJson.getInt("duration"))
                     .low(Profile.toMgdl(trJson.getDouble("targetBottom"), units))
                     .high(Profile.toMgdl(trJson.getDouble("targetTop"), units))
-                    .reason(JsonHelper.safeGetString(trJson, "reason", ""))
+                    .reason(trJson.getString("reason"))
                     ._id(trJson.getString("_id"))
                     .source(Source.NIGHTSCOUT);
             createOrUpdate(tempTarget);
