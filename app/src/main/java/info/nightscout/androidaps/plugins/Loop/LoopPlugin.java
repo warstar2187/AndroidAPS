@@ -44,6 +44,10 @@ import info.nightscout.androidaps.interfaces.PumpInterface;
 import info.nightscout.androidaps.interfaces.TreatmentsInterface;
 import info.nightscout.androidaps.logging.L;
 import info.nightscout.androidaps.plugins.ConfigBuilder.ConfigBuilderPlugin;
+<<<<<<< HEAD
+=======
+import info.nightscout.androidaps.plugins.ConstraintsObjectives.ObjectivesPlugin;
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 import info.nightscout.androidaps.plugins.ConfigBuilder.ProfileFunctions;
 import info.nightscout.androidaps.plugins.IobCobCalculator.events.EventAutosensCalculationFinished;
 import info.nightscout.androidaps.plugins.Loop.events.EventLoopSetLastRunGui;
@@ -51,6 +55,11 @@ import info.nightscout.androidaps.plugins.Loop.events.EventLoopUpdateGui;
 import info.nightscout.androidaps.plugins.Loop.events.EventNewOpenLoopNotification;
 import info.nightscout.androidaps.plugins.NSClientInternal.NSUpload;
 import info.nightscout.androidaps.plugins.Treatments.TreatmentsPlugin;
+<<<<<<< HEAD
+=======
+import info.nightscout.androidaps.plugins.Wear.ActionStringHandler;
+import info.nightscout.androidaps.events.EventAcceptOpenLoopChange;
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 import info.nightscout.androidaps.queue.Callback;
 import info.nightscout.androidaps.queue.commands.Command;
 import info.nightscout.utils.FabricPrivacy;
@@ -396,7 +405,12 @@ public class LoopPlugin extends PluginBase {
                             .setAutoCancel(true)
                             .setPriority(Notification.PRIORITY_HIGH)
                             .setCategory(Notification.CATEGORY_ALARM)
+<<<<<<< HEAD
                             .setVisibility(Notification.VISIBILITY_PUBLIC);
+=======
+                            .setVisibility(Notification.VISIBILITY_PUBLIC)
+                            .setLocalOnly(true);
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 
                     // Creates an explicit intent for an Activity in your app
                     Intent resultIntent = new Intent(MainApp.instance().getApplicationContext(), MainActivity.class);
@@ -418,6 +432,18 @@ public class LoopPlugin extends PluginBase {
                     // mId allows you to update the notification later on.
                     mNotificationManager.notify(Constants.notificationID, builder.build());
                     MainApp.bus().post(new EventNewOpenLoopNotification());
+<<<<<<< HEAD
+=======
+
+                    // Send to Wear
+                    ActionStringHandler.handleInitiate("changeRequest");
+                } else if (allowNotification) {
+                    // dismiss notifications
+                    NotificationManager notificationManager =
+                            (NotificationManager) MainApp.instance().getSystemService(Context.NOTIFICATION_SERVICE);
+                    notificationManager.cancel(Constants.notificationID);
+                    ActionStringHandler.handleInitiate("cancelChangeRequest");
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
                 }
             }
 
@@ -428,6 +454,32 @@ public class LoopPlugin extends PluginBase {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void acceptChangeRequest() {
+        Profile profile = ProfileFunctions.getInstance().getProfile();
+
+        applyTBRRequest(lastRun.constraintsProcessed, profile, new Callback() {
+            @Override
+            public void run() {
+                if (result.enacted) {
+                    lastRun.tbrSetByPump = result;
+                    lastRun.lastEnact = new Date();
+                    lastRun.lastOpenModeAccept = new Date();
+                    NSUpload.uploadDeviceStatus();
+                    ObjectivesPlugin objectivesPlugin = MainApp.getSpecificPlugin(ObjectivesPlugin.class);
+                    if (objectivesPlugin != null) {
+                        ObjectivesPlugin.manualEnacts++;
+                        ObjectivesPlugin.saveProgress();
+                    }
+                }
+                MainApp.bus().post(new EventAcceptOpenLoopChange());
+            }
+        });
+        FabricPrivacy.getInstance().logCustom(new CustomEvent("AcceptTemp"));
+    }
+
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     /**
      * expect absolute request and allow both absolute and percent response based on pump capabilities
      */

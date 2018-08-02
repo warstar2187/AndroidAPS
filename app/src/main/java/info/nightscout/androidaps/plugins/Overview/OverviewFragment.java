@@ -110,6 +110,11 @@ import info.nightscout.androidaps.plugins.Source.SourceDexcomG5Plugin;
 import info.nightscout.androidaps.plugins.Source.SourceXdripPlugin;
 import info.nightscout.androidaps.plugins.Treatments.TreatmentsPlugin;
 import info.nightscout.androidaps.plugins.Treatments.fragments.ProfileViewerDialog;
+<<<<<<< HEAD
+=======
+import info.nightscout.androidaps.plugins.Wear.ActionStringHandler;
+import info.nightscout.androidaps.events.EventAcceptOpenLoopChange;
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 import info.nightscout.androidaps.queue.Callback;
 import info.nightscout.utils.BolusWizard;
 import info.nightscout.utils.DateUtil;
@@ -741,6 +746,7 @@ public class OverviewFragment extends Fragment implements View.OnClickListener, 
                 builder.setPositiveButton(MainApp.gs(R.string.ok), (dialog, id) -> {
                     hideTempRecommendation();
                     clearNotification();
+<<<<<<< HEAD
                     LoopPlugin.getPlugin().applyTBRRequest(finalLastRun.constraintsProcessed, profile, new Callback() {
                         @Override
                         public void run() {
@@ -759,6 +765,9 @@ public class OverviewFragment extends Fragment implements View.OnClickListener, 
                         }
                     });
                     FabricPrivacy.getInstance().logCustom(new CustomEvent("AcceptTemp"));
+=======
+                    LoopPlugin.getPlugin().acceptChangeRequest();
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
                 });
                 builder.setNegativeButton(MainApp.gs(R.string.cancel), null);
                 builder.show();
@@ -959,6 +968,14 @@ public class OverviewFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Subscribe
+<<<<<<< HEAD
+=======
+    public void onStatusEvent(final EventAcceptOpenLoopChange ev) {
+        scheduleUpdateGUI("EventAcceptOpenLoopChange");
+    }
+
+    @Subscribe
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     public void onStatusEvent(final EventTempTargetChange ev) {
         scheduleUpdateGUI("EventTempTargetChange");
     }
@@ -998,6 +1015,11 @@ public class OverviewFragment extends Fragment implements View.OnClickListener, 
         NotificationManager notificationManager =
                 (NotificationManager) MainApp.instance().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(Constants.notificationID);
+<<<<<<< HEAD
+=======
+
+        ActionStringHandler.handleInitiate("cancelChangeRequest");
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     }
 
     private void updatePumpStatus(String status) {

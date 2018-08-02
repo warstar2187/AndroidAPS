@@ -1,5 +1,10 @@
 package info.nightscout.androidaps.plugins.Wear;
 
+<<<<<<< HEAD
+=======
+import android.app.NotificationManager;
+import android.content.Context;
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 
@@ -353,6 +358,26 @@ public class ActionStringHandler {
             }
             rAction += "ecarbs " + carbsAfterConstraints + " " + starttimestamp + " " + duration;
 
+<<<<<<< HEAD
+=======
+        } else if ("changeRequest".equals(act[0])) {
+            ////////////////////////////////////////////// CHANGE REQUEST
+            rTitle = MainApp.gs(R.string.openloop_newsuggestion);
+            rAction = "changeRequest";
+            final LoopPlugin.LastRun finalLastRun = LoopPlugin.lastRun;
+            rMessage += finalLastRun.constraintsProcessed;
+
+            WearPlugin.getPlugin().requestChangeConfirmation(rTitle, rMessage, rAction);
+            lastSentTimestamp = System.currentTimeMillis();
+            lastConfirmActionString = rAction;
+            return;
+        } else if ("cancelChangeRequest".equals(act[0])) {
+            ////////////////////////////////////////////// CANCEL CHANGE REQUEST NOTIFICATION
+            rAction = "cancelChangeRequest";
+
+            WearPlugin.getPlugin().requestNotificationCancel(rAction);
+            return;
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
         } else return;
 
 
@@ -626,6 +651,14 @@ public class ActionStringHandler {
             doECarbs(carbs, starttime, duration);
         } else if ("dismissoverviewnotification".equals(act[0])) {
             MainApp.bus().post(new EventDismissNotification(SafeParse.stringToInt(act[1])));
+<<<<<<< HEAD
+=======
+        } else if ("changeRequest".equals(act[0])) {
+            LoopPlugin.getPlugin().acceptChangeRequest();
+            NotificationManager notificationManager =
+                    (NotificationManager) MainApp.instance().getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.cancel(Constants.notificationID);
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
         }
         lastBolusWizard = null;
     }

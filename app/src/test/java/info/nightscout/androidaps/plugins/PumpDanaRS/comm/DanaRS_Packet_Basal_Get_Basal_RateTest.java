@@ -31,7 +31,10 @@ public class DanaRS_Packet_Basal_Get_Basal_RateTest extends DanaRS_Packet_Basal_
         AAPSMocker.mockSP();
         // test message decoding
         // rate is 0.01
+<<<<<<< HEAD
         startTesting();
+=======
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
         handleMessage(createArray(100, (byte) 1));
         assertEquals(false, failed);
         handleMessage(createArray(100, (byte) 5));

@@ -64,7 +64,12 @@ public class WatchUpdaterService extends WearableListenerService implements
     public static final String ACTION_SEND_BASALS = WatchUpdaterService.class.getName().concat(".SendBasals");
     public static final String ACTION_SEND_BOLUSPROGRESS = WatchUpdaterService.class.getName().concat(".BolusProgress");
     public static final String ACTION_SEND_ACTIONCONFIRMATIONREQUEST = WatchUpdaterService.class.getName().concat(".ActionConfirmationRequest");
+<<<<<<< HEAD
 
+=======
+    public static final String ACTION_SEND_CHANGECONFIRMATIONREQUEST = WatchUpdaterService.class.getName().concat(".ChangeConfirmationRequest");
+    public static final String ACTION_CANCEL_NOTIFICATION = WatchUpdaterService.class.getName().concat(".CancelNotification");
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 
     private GoogleApiClient googleApiClient;
     public static final String WEARABLE_DATA_PATH = "/nightscout_watch_data";
@@ -79,6 +84,11 @@ public class WatchUpdaterService extends WearableListenerService implements
     public static final String BASAL_DATA_PATH = "/nightscout_watch_basal";
     public static final String BOLUS_PROGRESS_PATH = "/nightscout_watch_bolusprogress";
     public static final String ACTION_CONFIRMATION_REQUEST_PATH = "/nightscout_watch_actionconfirmationrequest";
+<<<<<<< HEAD
+=======
+    public static final String ACTION_CHANGECONFIRMATION_REQUEST_PATH = "/nightscout_watch_changeconfirmationrequest";
+    public static final String ACTION_CANCELNOTIFICATION_REQUEST_PATH = "/nightscout_watch_cancelnotificationrequest";
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 
 
     boolean wear_integration = false;
@@ -154,6 +164,17 @@ public class WatchUpdaterService extends WearableListenerService implements
                         String message = intent.getStringExtra("message");
                         String actionstring = intent.getStringExtra("actionstring");
                         sendActionConfirmationRequest(title, message, actionstring);
+<<<<<<< HEAD
+=======
+                    } else if (ACTION_SEND_CHANGECONFIRMATIONREQUEST.equals(action)) {
+                        String title = intent.getStringExtra("title");
+                        String message = intent.getStringExtra("message");
+                        String actionstring = intent.getStringExtra("actionstring");
+                        sendChangeConfirmationRequest(title, message, actionstring);
+                    } else if (ACTION_CANCEL_NOTIFICATION.equals(action)) {
+                        String actionstring = intent.getStringExtra("actionstring");
+                        sendCancelNotificationRequest(actionstring);
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
                     } else {
                         sendData();
                     }
@@ -578,6 +599,45 @@ public class WatchUpdaterService extends WearableListenerService implements
         }
     }
 
+<<<<<<< HEAD
+=======
+    private void sendChangeConfirmationRequest(String title, String message, String actionstring) {
+        if (googleApiClient.isConnected()) {
+            PutDataMapRequest dataMapRequest = PutDataMapRequest.create(ACTION_CHANGECONFIRMATION_REQUEST_PATH);
+            //unique content
+            dataMapRequest.getDataMap().putLong("timestamp", System.currentTimeMillis());
+            dataMapRequest.getDataMap().putString("changeConfirmationRequest", "changeConfirmationRequest");
+            dataMapRequest.getDataMap().putString("title", title);
+            dataMapRequest.getDataMap().putString("message", message);
+            dataMapRequest.getDataMap().putString("actionstring", actionstring);
+
+            log.debug("Requesting confirmation from wear: " + actionstring);
+
+            PutDataRequest putDataRequest = dataMapRequest.asPutDataRequest();
+            Wearable.DataApi.putDataItem(googleApiClient, putDataRequest);
+        } else {
+            Log.e("changeConfirmRequest", "No connection to wearable available!");
+        }
+    }
+
+    private void sendCancelNotificationRequest(String actionstring) {
+        if (googleApiClient.isConnected()) {
+            PutDataMapRequest dataMapRequest = PutDataMapRequest.create(ACTION_CANCELNOTIFICATION_REQUEST_PATH);
+            //unique content
+            dataMapRequest.getDataMap().putLong("timestamp", System.currentTimeMillis());
+            dataMapRequest.getDataMap().putString("cancelNotificationRequest", "cancelNotificationRequest");
+            dataMapRequest.getDataMap().putString("actionstring", actionstring);
+
+            log.debug("Canceling notification on wear: " + actionstring);
+
+            PutDataRequest putDataRequest = dataMapRequest.asPutDataRequest();
+            Wearable.DataApi.putDataItem(googleApiClient, putDataRequest);
+        } else {
+            Log.e("cancelNotificationRequest", "No connection to wearable available!");
+        }
+    }
+
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     private void sendStatus() {
 
         if (googleApiClient.isConnected()) {

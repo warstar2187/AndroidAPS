@@ -18,17 +18,23 @@ public class DanaRS_Packet {
     protected int type = BleCommandUtil.DANAR_PACKET__TYPE_RESPONSE; // most of the messages, should be changed for others
     protected int opCode;
 
+<<<<<<< HEAD
     protected boolean testingMode = false;
 
+=======
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     public DanaRS_Packet() {
         received = false;
         failed = false;
     }
 
+<<<<<<< HEAD
     public void startTesting(){
         testingMode = true;
     }
 
+=======
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     public void setReceived() {
         received = true;
     }
@@ -73,6 +79,10 @@ public class DanaRS_Packet {
     protected static byte[] getBytes(byte[] data, int srcStart, int srcLength) {
         try {
             byte[] ret = new byte[srcLength];
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
             System.arraycopy(data, srcStart, ret, 0, srcLength);
 
             return ret;

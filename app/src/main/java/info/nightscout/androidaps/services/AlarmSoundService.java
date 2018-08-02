@@ -18,7 +18,11 @@ import info.nightscout.androidaps.R;
 import info.nightscout.androidaps.logging.L;
 
 public class AlarmSoundService extends Service {
+<<<<<<< HEAD
     private static Logger log = LoggerFactory.getLogger(L.ALARM);
+=======
+    private static Logger log = LoggerFactory.getLogger(L.CORE);
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 
     MediaPlayer player;
     int resourceId = R.raw.error;
@@ -35,14 +39,22 @@ public class AlarmSoundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+<<<<<<< HEAD
         if (L.isEnabled(L.ALARM))
+=======
+        if (L.isEnabled(L.CORE))
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
             log.debug("onCreate");
     }
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (player != null && player.isPlaying())
             player.stop();
+<<<<<<< HEAD
         if (L.isEnabled(L.ALARM))
+=======
+        if (L.isEnabled(L.CORE))
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
             log.debug("onStartCommand");
         if (intent != null && intent.hasExtra("soundid"))
             resourceId = intent.getIntExtra("soundid", R.raw.error);
@@ -77,7 +89,11 @@ public class AlarmSoundService extends Service {
     public void onDestroy() {
         player.stop();
         player.release();
+<<<<<<< HEAD
         if (L.isEnabled(L.ALARM))
+=======
+        if (L.isEnabled(L.CORE))
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
             log.debug("onDestroy");
     }
 }

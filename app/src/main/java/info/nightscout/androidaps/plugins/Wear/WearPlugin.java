@@ -100,6 +100,15 @@ public class WearPlugin extends PluginBase {
         ctx.startService(new Intent(ctx, WatchUpdaterService.class).setAction(WatchUpdaterService.ACTION_OPEN_SETTINGS));
     }
 
+<<<<<<< HEAD
+=======
+    void requestNotificationCancel(String actionstring) {
+        Intent intent = new Intent(ctx, WatchUpdaterService.class).setAction(WatchUpdaterService.ACTION_CANCEL_NOTIFICATION);
+        intent.putExtra("actionstring", actionstring);
+        ctx.startService(intent);
+    }
+
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 
     @Subscribe
     public void onStatusEvent(final EventPreferenceChange ev) {
@@ -192,6 +201,18 @@ public class WearPlugin extends PluginBase {
         ctx.startService(intent);
     }
 
+<<<<<<< HEAD
+=======
+    public void requestChangeConfirmation(String title, String message, String actionstring) {
+
+        Intent intent = new Intent(ctx, WatchUpdaterService.class).setAction(WatchUpdaterService.ACTION_SEND_CHANGECONFIRMATIONREQUEST);
+        intent.putExtra("title", title);
+        intent.putExtra("message", message);
+        intent.putExtra("actionstring", actionstring);
+        ctx.startService(intent);
+    }
+
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     public static void registerWatchUpdaterService(WatchUpdaterService wus) {
         watchUS = wus;
     }

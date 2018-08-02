@@ -26,11 +26,14 @@
 
         <SwitchPreference
             android:defaultValue="false"
+<<<<<<< HEAD
             android:key="overview_show_autosens"
             android:title="@string/overview_show_autosens" />
 
         <SwitchPreference
             android:defaultValue="false"
+=======
+>>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
             android:key="@string/key_use_smb"
             android:summary="@string/enablesmb_summary"
             android:title="@string/enablesmb" />
