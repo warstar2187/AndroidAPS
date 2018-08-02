@@ -18,9 +18,15 @@ public class DanaRS_Packet {
     protected int type = BleCommandUtil.DANAR_PACKET__TYPE_RESPONSE; // most of the messages, should be changed for others
     protected int opCode;
 
+    protected boolean testingMode = false;
+
     public DanaRS_Packet() {
         received = false;
         failed = false;
+    }
+
+    public void startTesting(){
+        testingMode = true;
     }
 
     public void setReceived() {
