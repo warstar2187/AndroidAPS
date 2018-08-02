@@ -6,11 +6,13 @@ import android.content.Context;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import info.AAPSMocker;
 import info.nightscout.androidaps.MainApp;
 import info.nightscout.androidaps.interfaces.PluginType;
+import info.nightscout.androidaps.logging.L;
 import info.nightscout.androidaps.plugins.ConfigBuilder.ConfigBuilderPlugin;
 import info.nightscout.androidaps.plugins.PumpDanaRS.DanaRSPlugin;
 import info.nightscout.utils.SP;
@@ -23,7 +25,8 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({MainApp.class, SP.class})
+@SuppressStaticInitializationFor("info.nightscout.androidaps.logging.L")
+@PrepareForTest({MainApp.class, SP.class, L.class})
 public class DanaRS_Packet_Basal_Set_Suspend_OnTest extends DanaRS_Packet_Basal_Set_Suspend_On {
 
     @Test

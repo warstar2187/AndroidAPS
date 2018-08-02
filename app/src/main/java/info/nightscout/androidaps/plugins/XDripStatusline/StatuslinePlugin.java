@@ -14,11 +14,8 @@ import info.nightscout.androidaps.R;
 import info.nightscout.androidaps.data.IobTotal;
 import info.nightscout.androidaps.data.Profile;
 import info.nightscout.androidaps.db.TemporaryBasal;
-<<<<<<< HEAD
-=======
 import info.nightscout.androidaps.events.EventAppInitialized;
 import info.nightscout.androidaps.events.EventConfigBuilderChange;
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 import info.nightscout.androidaps.events.EventExtendedBolusChange;
 import info.nightscout.androidaps.events.EventNewBG;
 import info.nightscout.androidaps.events.EventPreferenceChange;
@@ -85,10 +82,6 @@ public class StatuslinePlugin extends PluginBase {
     @Override
     protected void onStart() {
         MainApp.bus().register(this);
-<<<<<<< HEAD
-        sendStatus();
-=======
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
         super.onStart();
     }
 
@@ -191,8 +184,6 @@ public class StatuslinePlugin extends PluginBase {
     }
 
     @Subscribe
-<<<<<<< HEAD
-=======
     public void onStatusEvent(final EventAppInitialized ev) {
         sendStatus();
     }
@@ -203,7 +194,6 @@ public class StatuslinePlugin extends PluginBase {
     }
 
     @Subscribe
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     public void onStatusEvent(final EventRefreshOverview ev) {
         //Filter events where loop is (de)activated
         if ((lastLoopStatus != LoopPlugin.getPlugin().isEnabled(PluginType.LOOP))) {

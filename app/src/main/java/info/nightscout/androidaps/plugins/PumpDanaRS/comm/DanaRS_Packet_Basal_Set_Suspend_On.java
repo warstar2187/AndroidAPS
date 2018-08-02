@@ -13,29 +13,23 @@ public class DanaRS_Packet_Basal_Set_Suspend_On extends DanaRS_Packet {
     public DanaRS_Packet_Basal_Set_Suspend_On() {
         super();
         opCode = BleCommandUtil.DANAR_PACKET__OPCODE_BASAL__SET_SUSPEND_ON;
-<<<<<<< HEAD
-        //if (L.isEnabled(L.PUMPCOMM))
-            log.debug("Turning on suspend");
-=======
         if (L.isEnabled(L.PUMPCOMM)) {
             log.debug("Turning on suspend");
         }
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     }
 
     @Override
     public void handleMessage(byte[] data) {
         int result = intFromBuff(data, 0, 1);
-<<<<<<< HEAD
-        if (result != 0)
+        if(result != 0)
             failed = true;
-=======
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
         if (L.isEnabled(L.PUMPCOMM)) {
             if (result == 0)
                 log.debug("Result OK");
-            else
+            else {
                 log.error("Result Error: " + result);
+                failed = true;
+            }
         }
     }
 
@@ -43,8 +37,4 @@ public class DanaRS_Packet_Basal_Set_Suspend_On extends DanaRS_Packet {
     public String getFriendlyName() {
         return "BASAL__SET_SUSPEND_ON";
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 }

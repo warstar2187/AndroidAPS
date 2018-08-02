@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-<<<<<<< HEAD
-=======
 import com.squareup.otto.Subscribe;
 
 import org.slf4j.Logger;
@@ -17,16 +15,12 @@ import info.nightscout.androidaps.MainApp;
 import info.nightscout.androidaps.events.EventAppExit;
 import info.nightscout.androidaps.logging.L;
 
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
 /**
  * Keeps AndroidAPS in foreground state, so it won't be terminated by Android nor get restricted by the background execution limits
  */
 public class DummyService extends Service {
-<<<<<<< HEAD
-=======
     private static Logger log = LoggerFactory.getLogger(L.CORE);
 
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,10 +35,6 @@ public class DummyService extends Service {
         return START_STICKY;
     }
 
-<<<<<<< HEAD
-    @Override
-    public void onDestroy() {
-=======
     @Subscribe
     public void onStatusEvent(EventAppExit event) {
         if (L.isEnabled(L.CORE))
@@ -63,7 +53,6 @@ public class DummyService extends Service {
         if (L.isEnabled(L.CORE))
             log.debug("onDestroy");
         MainApp.bus().unregister(this);
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
         stopForeground(true);
     }
 }

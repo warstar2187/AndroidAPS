@@ -53,6 +53,9 @@ public class L {
     }
 
     private static LogElement findByName(String name) {
+        // Added by Rumen for unit testing
+        if(logElements == null)
+            return new LogElement(false);
         for (LogElement element : logElements) {
             if (element.name.equals(name))
                 return element;
@@ -81,10 +84,6 @@ public class L {
     public static final String BGSOURCE = "BGSOURCE";
     public static final String OVERVIEW = "OVERVIEW";
     public static final String NOTIFICATION = "NOTIFICATION";
-<<<<<<< HEAD
-    public static final String ALARM = "ALARM";
-=======
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
     public static final String DATASERVICE = "DATASERVICE";
     public static final String DATABASE = "DATABASE";
     public static final String DATAFOOD = "DATAFOOD";
@@ -101,10 +100,6 @@ public class L {
 
     private static void initialize() {
         logElements = new ArrayList<>();
-<<<<<<< HEAD
-        logElements.add(new LogElement(ALARM, false));
-=======
->>>>>>> 7a175e48d808b820c6359357518ef9bd2fd1afde
         logElements.add(new LogElement(APS, true));
         logElements.add(new LogElement(AUTOSENS, false));
         logElements.add(new LogElement(BGSOURCE, true));

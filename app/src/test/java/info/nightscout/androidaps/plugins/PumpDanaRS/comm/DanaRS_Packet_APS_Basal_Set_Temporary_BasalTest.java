@@ -10,6 +10,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import info.AAPSMocker;
 import info.nightscout.androidaps.MainApp;
+import info.nightscout.androidaps.logging.L;
 import info.nightscout.androidaps.plugins.ConfigBuilder.ConfigBuilderPlugin;
 import info.nightscout.utils.SP;
 import info.nightscout.utils.ToastUtils;
@@ -21,7 +22,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({MainApp.class, SP.class})
+@PrepareForTest({MainApp.class, SP.class, L.class})
 public class DanaRS_Packet_APS_Basal_Set_Temporary_BasalTest extends DanaRS_Packet_APS_Basal_Set_Temporary_Basal {
 
     @Test
