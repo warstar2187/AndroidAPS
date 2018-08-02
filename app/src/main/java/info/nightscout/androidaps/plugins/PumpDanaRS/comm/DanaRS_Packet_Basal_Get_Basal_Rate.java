@@ -18,13 +18,13 @@ public class DanaRS_Packet_Basal_Get_Basal_Rate extends DanaRS_Packet {
 	private Logger log = LoggerFactory.getLogger(L.PUMPCOMM);
 
 
-	public DanaRS_Packet_Basal_Get_Basal_Rate() {
-		super();
-		opCode = BleCommandUtil.DANAR_PACKET__OPCODE_BASAL__GET_BASAL_RATE;
+    public DanaRS_Packet_Basal_Get_Basal_Rate() {
+        super();
+        opCode = BleCommandUtil.DANAR_PACKET__OPCODE_BASAL__GET_BASAL_RATE;
         if (L.isEnabled(L.PUMPCOMM)) {
             log.debug("Requesting basal rates");
         }
-	}
+    }
 
 	@Override
 	public void handleMessage(byte[] data) {

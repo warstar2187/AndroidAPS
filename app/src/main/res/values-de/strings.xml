@@ -982,6 +982,7 @@ maxIOB = durchschnittlicher Essensbolus + 3 x maximale Basalrate</string>
   <string name="request">Anfordern</string>
   <string name="insulinsourcesetup">Insulin Plugin konfigurieren</string>
   <string name="exit">Verlassen</string>
+  <string name="danar_useroptions">Benutzerdefinierte Einstellungen</string>
   <string name="danar_timedisplay">Zeitmodus</string>
   <string name="danar_buttonscroll">Scrollfunktion</string>
   <string name="danar_beep">Piepen (Tastentöne)</string>

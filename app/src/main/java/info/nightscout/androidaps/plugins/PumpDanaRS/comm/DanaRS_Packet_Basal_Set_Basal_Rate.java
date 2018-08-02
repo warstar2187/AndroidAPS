@@ -44,10 +44,8 @@ public class DanaRS_Packet_Basal_Set_Basal_Rate extends DanaRS_Packet {
         if (L.isEnabled(L.PUMPCOMM)) {
             if (result == 0)
                 log.debug("Result OK");
-            else {
-                failed = true;
+            else
                 log.error("Result Error: " + result);
-            }
         }
     }
 
