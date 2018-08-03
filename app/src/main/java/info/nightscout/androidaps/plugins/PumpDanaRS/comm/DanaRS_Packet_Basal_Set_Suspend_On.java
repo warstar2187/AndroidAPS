@@ -27,7 +27,7 @@ public class DanaRS_Packet_Basal_Set_Suspend_On extends DanaRS_Packet {
             if (result == 0)
                 log.debug("Result OK");
             else
-                log.error("Result Error: " + result);
+                failed = true;
         }
     }
 

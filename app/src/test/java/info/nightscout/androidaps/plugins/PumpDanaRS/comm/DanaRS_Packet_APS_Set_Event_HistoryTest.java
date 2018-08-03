@@ -10,6 +10,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import info.AAPSMocker;
 import info.nightscout.androidaps.MainApp;
+import info.nightscout.androidaps.logging.L;
 import info.nightscout.androidaps.plugins.ConfigBuilder.ConfigBuilderPlugin;
 import info.nightscout.androidaps.plugins.PumpDanaR.DanaRPump;
 import info.nightscout.utils.SP;
@@ -22,14 +23,16 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({MainApp.class, SP.class})
-public class DanaRS_Packet_APS_Set_Event_HistoryTest extends DanaRS_Packet_APS_Set_Event_History {
+@PrepareForTest({MainApp.class, SP.class, L.class})
+public class DanaRS_Packet_APS_Set_Event_HistoryTest {
 
     @Test
     public void runTest() {
         AAPSMocker.mockMainApp();
         AAPSMocker.mockApplicationContext();
         AAPSMocker.mockSP();
+        AAPSMocker.mockL();
+
         // test for negative carbs
         DanaRS_Packet_APS_Set_Event_History historyTest = new DanaRS_Packet_APS_Set_Event_History(DanaRPump.CARBS, System.currentTimeMillis(), -1, 0);
         byte[] testparams = historyTest.getRequestParams();
@@ -53,12 +56,12 @@ public class DanaRS_Packet_APS_Set_Event_HistoryTest extends DanaRS_Packet_APS_S
         assertEquals((byte)DanaRPump.CARBS, testparams[0]);
 
         // test message decoding
-        handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
-        assertEquals(false, failed);
-        handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 1});
-        assertEquals(true, failed);
+        historyTest.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
+        assertEquals(false, historyTest.failed);
+        historyTest.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 1});
+        assertEquals(true, historyTest.failed);
 
-        assertEquals("APS_SET_EVENT_HISTORY", getFriendlyName());
+        assertEquals("APS_SET_EVENT_HISTORY", historyTest.getFriendlyName());
     }
 
 }

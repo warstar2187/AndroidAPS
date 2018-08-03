@@ -25,9 +25,8 @@ import static org.powermock.api.support.membermodification.MemberModifier.suppre
  */
 
 @RunWith(PowerMockRunner.class)
-@SuppressStaticInitializationFor("info.nightscout.androidaps.logging.L")
-@PrepareForTest({MainApp.class, SP.class, L.class, L.LogElement.class})
-public class DanaRS_Packet_Basal_Get_Basal_RateTest extends DanaRS_Packet_Basal_Get_Basal_Rate {
+@PrepareForTest({MainApp.class, SP.class, L.class})
+public class DanaRS_Packet_Basal_Get_Basal_RateTest {
 
     @Test
     public void runTest() {
@@ -35,14 +34,18 @@ public class DanaRS_Packet_Basal_Get_Basal_RateTest extends DanaRS_Packet_Basal_
         AAPSMocker.mockApplicationContext();
         AAPSMocker.mockSP();
         AAPSMocker.mockBus();
+        AAPSMocker.mockL();
+
+        DanaRS_Packet_Basal_Get_Basal_Rate packet = new DanaRS_Packet_Basal_Get_Basal_Rate();
+
         // test message decoding
         // rate is 0.01
-        handleMessage(createArray(100, (byte) 1));
-        assertEquals(false, failed);
-        handleMessage(createArray(100, (byte) 5));
-        assertEquals(true, failed);
+        packet.handleMessage(createArray(100, (byte) 1));
+        assertEquals(false, packet.failed);
+        packet.handleMessage(createArray(100, (byte) 5));
+        assertEquals(true, packet.failed);
 
-        assertEquals("BASAL__GET_BASAL_RATE", getFriendlyName());
+        assertEquals("BASAL__GET_BASAL_RATE", packet.getFriendlyName());
     }
 
     byte[] createArray(int length, byte fillWith){

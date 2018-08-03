@@ -31,6 +31,7 @@ public class DanaRS_Packet_Basal_Get_Profile_Basal_RateTest extends DanaRS_Packe
         AAPSMocker.mockApplicationContext();
         AAPSMocker.mockSP();
         AAPSMocker.mockBus();
+        AAPSMocker.mockL();
 
         // test if pumpRofile array is set right
         double basal01 = byteArrayToInt(getBytes(createArray(50, (byte) 1), 2, 2)) / 100d;

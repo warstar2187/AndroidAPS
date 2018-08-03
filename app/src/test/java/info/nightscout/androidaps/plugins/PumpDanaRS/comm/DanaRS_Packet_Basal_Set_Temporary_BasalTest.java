@@ -34,6 +34,7 @@ public class DanaRS_Packet_Basal_Set_Temporary_BasalTest extends DanaRS_Packet_B
         AAPSMocker.mockMainApp();
         AAPSMocker.mockApplicationContext();
         AAPSMocker.mockSP();
+        AAPSMocker.mockL();
 
         DanaRS_Packet_Basal_Set_Temporary_Basal testPacket = new DanaRS_Packet_Basal_Set_Temporary_Basal(50, 20);
         // params

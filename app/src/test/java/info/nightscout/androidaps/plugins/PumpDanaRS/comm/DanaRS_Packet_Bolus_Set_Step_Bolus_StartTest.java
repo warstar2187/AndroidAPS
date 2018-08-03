@@ -33,21 +33,23 @@ public class DanaRS_Packet_Bolus_Set_Step_Bolus_StartTest extends DanaRS_Packet_
         AAPSMocker.mockSP();
         AAPSMocker.mockConstraintsChecker();
         // test message generation - fails with null pointer exc
-        DanaRS_Packet_Bolus_Set_Step_Bolus_Start testBolus = new DanaRS_Packet_Bolus_Set_Step_Bolus_Start(1.0d,0);
-        testBolus.failed = true;
-        byte[] generatedCode = testBolus.getRequestParams();
+        DanaRS_Packet_Bolus_Set_Step_Bolus_Start packet = new DanaRS_Packet_Bolus_Set_Step_Bolus_Start(1.0d,0);
+        packet.failed = true;
+        byte[] generatedCode = packet.getRequestParams();
         assertEquals(3 , generatedCode.length);
         assertEquals((byte) ( (1*100) & 0xff) , generatedCode[0]);
         assertEquals((byte) (((1*100) >>> 8) & 0xff) , generatedCode[1]);
         assertEquals((byte) 0, generatedCode[2]);
 
-        // test message decoding
-        handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
-        assertEquals(false, failed);
-        handleMessage(new byte[]{(byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1});
-        assertEquals(true, failed);
 
-        assertEquals("BOLUS__SET_STEP_BOLUS_START", getFriendlyName());
+        // test message decoding
+        packet = new DanaRS_Packet_Bolus_Set_Step_Bolus_Start();
+        packet.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
+        assertEquals(false, packet.failed);
+        packet.handleMessage(new byte[]{(byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1});
+        assertEquals(true, packet.failed);
+
+        assertEquals("BOLUS__SET_STEP_BOLUS_START", packet.getFriendlyName());
     }
 
 }

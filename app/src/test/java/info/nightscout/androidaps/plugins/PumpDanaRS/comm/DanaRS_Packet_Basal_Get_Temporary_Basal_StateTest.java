@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({MainApp.class, SP.class, L.class})
-public class DanaRS_Packet_Basal_Set_Suspend_OnTest {
+public class DanaRS_Packet_Basal_Get_Temporary_Basal_StateTest {
 
     @Test
     public void runTest() {
@@ -28,15 +28,22 @@ public class DanaRS_Packet_Basal_Set_Suspend_OnTest {
         AAPSMocker.mockSP();
         AAPSMocker.mockL();
 
-        DanaRS_Packet_Basal_Set_Suspend_On packet = new DanaRS_Packet_Basal_Set_Suspend_On();
+        DanaRS_Packet_Basal_Get_Temporary_Basal_State packet = new DanaRS_Packet_Basal_Get_Temporary_Basal_State();
 
         // test message decoding
-        packet.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
+        packet.handleMessage(createArray(50,(byte) 0));
         assertEquals(false, packet.failed);
-        packet.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 1});
+        packet.handleMessage(createArray(50,(byte) 1));
         assertEquals(true, packet.failed);
 
-        assertEquals("BASAL__SET_SUSPEND_ON", packet.getFriendlyName());
+        assertEquals("BASAL__TEMPORARY_BASAL_STATE", packet.getFriendlyName());
     }
 
+    byte[] createArray(int length, byte fillWith) {
+        byte[] ret = new byte[length];
+        for (int i = 0; i < length; i++) {
+            ret[i] = fillWith;
+        }
+        return ret;
+    }
 }

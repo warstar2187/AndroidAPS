@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({MainApp.class, SP.class, L.class})
-public class DanaRS_Packet_Basal_Set_Suspend_OnTest {
+public class DanaRS_Packet_Basal_Get_Profile_NumberTest {
 
     @Test
     public void runTest() {
@@ -28,15 +28,14 @@ public class DanaRS_Packet_Basal_Set_Suspend_OnTest {
         AAPSMocker.mockSP();
         AAPSMocker.mockL();
 
-        DanaRS_Packet_Basal_Set_Suspend_On packet = new DanaRS_Packet_Basal_Set_Suspend_On();
+        DanaRS_Packet_Basal_Get_Profile_Number packet = new DanaRS_Packet_Basal_Get_Profile_Number();
 
         // test message decoding
         packet.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
         assertEquals(false, packet.failed);
-        packet.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 1});
-        assertEquals(true, packet.failed);
+        // if data.length > 4 should return fail
 
-        assertEquals("BASAL__SET_SUSPEND_ON", packet.getFriendlyName());
+        assertEquals("BASAL__GET_PROFILE_NUMBER", packet.getFriendlyName());
     }
 
 }
