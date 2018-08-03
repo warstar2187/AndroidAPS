@@ -26,6 +26,7 @@ import info.nightscout.androidaps.plugins.Treatments.TreatmentService;
 import info.nightscout.androidaps.queue.CommandQueue;
 import info.nightscout.utils.SP;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -122,6 +123,11 @@ public class AAPSMocker {
         when(SP.getLong(anyInt(), anyLong())).thenReturn(0L);
         when(SP.getBoolean(anyInt(), anyBoolean())).thenReturn(false);
         when(SP.getInt(anyInt(), anyInt())).thenReturn(0);
+    }
+
+    public static void mockL() {
+        PowerMockito.mockStatic(L.class);
+        when(L.isEnabled(any())).thenReturn(true);
     }
 
     public static void mockApplicationContext() {
