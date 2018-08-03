@@ -10,6 +10,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import info.AAPSMocker;
 import info.nightscout.androidaps.MainApp;
+import info.nightscout.androidaps.data.ConstraintChecker;
 import info.nightscout.androidaps.logging.L;
 import info.nightscout.androidaps.plugins.ConfigBuilder.ConfigBuilderPlugin;
 import info.nightscout.utils.SP;
@@ -22,7 +23,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({MainApp.class, SP.class, L.class})
+@PrepareForTest({MainApp.class, SP.class, L.class, ConstraintChecker.class})
 public class DanaRS_Packet_Bolus_Set_Step_Bolus_StartTest extends DanaRS_Packet_Bolus_Set_Step_Bolus_Start {
 
     @Test
@@ -30,12 +31,15 @@ public class DanaRS_Packet_Bolus_Set_Step_Bolus_StartTest extends DanaRS_Packet_
         AAPSMocker.mockMainApp();
         AAPSMocker.mockApplicationContext();
         AAPSMocker.mockSP();
+        AAPSMocker.mockConstraintsChecker();
         // test message generation - fails with null pointer exc
-//        DanaRS_Packet_Bolus_Set_Step_Bolus_Start testBolus = new DanaRS_Packet_Bolus_Set_Step_Bolus_Start(1.0d,0);
-//        byte[] generatedCode = testBolus.getRequestParams();
-//        assertEquals(3 , generatedCode.length);
-//        assertEquals((byte) 1 , generatedCode[1]);
-//        assertEquals((byte) 0, generatedCode[2]);
+        DanaRS_Packet_Bolus_Set_Step_Bolus_Start testBolus = new DanaRS_Packet_Bolus_Set_Step_Bolus_Start(1.0d,0);
+        testBolus.failed = true;
+        byte[] generatedCode = testBolus.getRequestParams();
+        assertEquals(3 , generatedCode.length);
+        assertEquals((byte) ( (1*100) & 0xff) , generatedCode[0]);
+        assertEquals((byte) (((1*100) >>> 8) & 0xff) , generatedCode[1]);
+        assertEquals((byte) 0, generatedCode[2]);
 
         // test message decoding
         handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});

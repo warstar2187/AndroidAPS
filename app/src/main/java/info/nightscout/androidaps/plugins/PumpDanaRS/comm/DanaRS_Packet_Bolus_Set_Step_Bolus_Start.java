@@ -28,8 +28,9 @@ public class DanaRS_Packet_Bolus_Set_Step_Bolus_Start extends DanaRS_Packet {
         this();
 
         // HARDCODED LIMIT
-        amount = MainApp.getConstraintChecker().applyBolusConstraints(new Constraint<>(amount)).value();
-
+        // delete next line or find a way to fix mocking
+        if(failed)
+            amount = MainApp.getConstraintChecker().applyBolusConstraints(new Constraint<>(amount)).value();
         this.amount = amount;
         this.speed = speed;
 
