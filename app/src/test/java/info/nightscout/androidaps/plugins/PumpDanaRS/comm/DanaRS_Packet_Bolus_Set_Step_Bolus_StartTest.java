@@ -34,11 +34,13 @@ public class DanaRS_Packet_Bolus_Set_Step_Bolus_StartTest {
 
         DanaRS_Packet_Bolus_Set_Step_Bolus_Start packet = new DanaRS_Packet_Bolus_Set_Step_Bolus_Start();
 
-        // test params
+
+      // test params
         byte[] testparams = packet.getRequestParams();
         assertEquals(0, testparams[0]);
         assertEquals(0, testparams[2]);
-        // test message decoding
+
+      // test message decoding
         packet.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
         assertEquals(false, packet.failed);
         packet.handleMessage(new byte[]{(byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1});
