@@ -18,12 +18,12 @@ import info.nightscout.utils.ToastUtils;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by Rumen on 31.07.2018.
+ * Created by Rumen on 06.08.2018.
  */
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({MainApp.class, SP.class, L.class})
-public class DanaRS_Packet_Bolus_Set_Step_Bolus_StartTest {
+public class DanaRS_Packet_Etc_Keep_ConnectionTest {
 
     @Test
     public void runTest() {
@@ -32,19 +32,20 @@ public class DanaRS_Packet_Bolus_Set_Step_Bolus_StartTest {
         AAPSMocker.mockSP();
         AAPSMocker.mockL();
 
-        DanaRS_Packet_Bolus_Set_Step_Bolus_Start packet = new DanaRS_Packet_Bolus_Set_Step_Bolus_Start();
+        DanaRS_Packet_Etc_Keep_Connection packet = new DanaRS_Packet_Etc_Keep_Connection();
+
 
         // test params
         byte[] testparams = packet.getRequestParams();
-        assertEquals(0, testparams[0]);
-        assertEquals(0, testparams[2]);
+        assertEquals(null, packet.getRequestParams());
+
         // test message decoding
         packet.handleMessage(new byte[]{(byte) 0, (byte) 0, (byte) 0});
         assertEquals(false, packet.failed);
         packet.handleMessage(new byte[]{(byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1, (byte) 1});
         assertEquals(true, packet.failed);
 
-        assertEquals("BOLUS__SET_STEP_BOLUS_START", packet.getFriendlyName());
+        assertEquals("ETC__KEEP_CONNECTION", packet.getFriendlyName());
     }
 
 }
