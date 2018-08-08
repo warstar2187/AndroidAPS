@@ -29,11 +29,7 @@ public class DanaRS_Packet_Bolus_Set_Step_Bolus_Start extends DanaRS_Packet {
         this();
 
         // HARDCODED LIMIT - if there is one that could be created
-        ConstraintChecker constraintChecker = MainApp.getConstraintChecker();
-        Constraint<Double> bolusConstraint = constraintChecker.applyBolusConstraints(new Constraint<>(amount));
-        double constrained = amount;
-        if (bolusConstraint != null)
-            amount = MainApp.getConstraintChecker().applyBolusConstraints(new Constraint<>(amount)).value();
+        amount = MainApp.getConstraintChecker().applyBolusConstraints(new Constraint<>(amount)).value();
 
         this.amount = amount;
         this.speed = speed;
