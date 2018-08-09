@@ -1,12 +1,12 @@
 package info.nightscout.androidaps.plugins.PumpDanaRS.comm;
 
 
+import com.cozmo.danar.util.BleCommandUtil;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.util.Date;
 
 import info.AAPSMocker;
 import info.nightscout.androidaps.MainApp;
@@ -18,20 +18,19 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by Rumen Georgiev on 8/9/2018.
  */
-
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({MainApp.class, SP.class, L.class})
-public class DanaRS_Packet_History_RefillTest {
-
+@PrepareForTest({MainApp.class, SP.class, L.class, DanaRSMessageHashTable.class})
+public class DanaRSMessageHashTableTest {
     @Test
     public void runTest() {
         AAPSMocker.mockMainApp();
         AAPSMocker.mockApplicationContext();
         AAPSMocker.mockSP();
         AAPSMocker.mockL();
-        DanaRS_Packet_History_Refill packet = new DanaRS_Packet_History_Refill(new Date(System.currentTimeMillis()));
-
-        assertEquals("REVIEW__REFILL", packet.getFriendlyName());
+//        HashMap<Integer, DanaRS_Packet> messages = new DanaRSMessageHashTable().messages;
+        DanaRS_Packet forTesting = new DanaRS_Packet_APS_Set_Event_History();
+        DanaRS_Packet testPacket = DanaRSMessageHashTable.findMessage(forTesting.getCommand());
+        assertEquals(BleCommandUtil.DANAR_PACKET__OPCODE__APS_SET_EVENT_HISTORY, testPacket.getOpCode());
     }
 
 }

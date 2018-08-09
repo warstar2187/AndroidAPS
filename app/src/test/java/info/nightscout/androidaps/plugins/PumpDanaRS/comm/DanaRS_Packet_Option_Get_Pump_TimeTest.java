@@ -1,29 +1,15 @@
 package info.nightscout.androidaps.plugins.PumpDanaRS.comm;
 
 
-import android.content.Context;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import info.AAPSMocker;
-import info.SPMocker;
 import info.nightscout.androidaps.MainApp;
-import info.nightscout.androidaps.db.DatabaseHelper;
 import info.nightscout.androidaps.logging.L;
-import info.nightscout.androidaps.plugins.ConfigBuilder.ConfigBuilderPlugin;
-import info.nightscout.androidaps.plugins.NSClientInternal.NSUpload;
-import info.nightscout.androidaps.plugins.PumpDanaR.DanaRPump;
-import info.nightscout.androidaps.plugins.Treatments.TreatmentService;
-import info.nightscout.androidaps.plugins.Treatments.TreatmentsPlugin;
 import info.nightscout.utils.SP;
-import info.nightscout.utils.ToastUtils;
 
 import static org.junit.Assert.assertEquals;
 
