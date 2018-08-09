@@ -24,6 +24,8 @@ import info.nightscout.androidaps.db.DatabaseHelper;
 import info.nightscout.androidaps.interfaces.Constraint;
 import info.nightscout.androidaps.logging.L;
 import info.nightscout.androidaps.plugins.ConfigBuilder.ConfigBuilderPlugin;
+import info.nightscout.androidaps.plugins.NSClientInternal.NSUpload;
+import info.nightscout.androidaps.plugins.NSClientInternal.data.DbLogger;
 import info.nightscout.androidaps.plugins.Treatments.TreatmentService;
 import info.nightscout.androidaps.plugins.Treatments.TreatmentsPlugin;
 import info.nightscout.androidaps.queue.CommandQueue;
@@ -34,6 +36,7 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -98,6 +101,7 @@ public class AAPSMocker {
         when(MainApp.gs(R.string.hoursago)).thenReturn("%.1fh ago");
         when(MainApp.gs(R.string.careportal_profileswitch)).thenReturn("Profile Switch");
         when(MainApp.gs(R.string.configbuilder_insulin)).thenReturn("Insulin");
+        when(MainApp.gs(R.string.bolusdelivering)).thenReturn("Delivering 0.0U");
     }
 
     public static MainApp mockMainApp() {
@@ -133,6 +137,10 @@ public class AAPSMocker {
     public static void mockL() {
         PowerMockito.mockStatic(L.class);
         when(L.isEnabled(any())).thenReturn(true);
+    }
+
+    public static void mockNSUpload(){
+        PowerMockito.mockStatic(NSUpload.class);
     }
 
     public static void mockApplicationContext() {
