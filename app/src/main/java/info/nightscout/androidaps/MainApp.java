@@ -67,6 +67,7 @@ import info.nightscout.androidaps.plugins.Sensitivity.SensitivityOref1Plugin;
 import info.nightscout.androidaps.plugins.Sensitivity.SensitivityWeightedAveragePlugin;
 import info.nightscout.androidaps.plugins.SmsCommunicator.SmsCommunicatorPlugin;
 import info.nightscout.androidaps.plugins.Source.SourceDexcomG5Plugin;
+import info.nightscout.androidaps.plugins.Source.SourceFilePlugin;
 import info.nightscout.androidaps.plugins.Source.SourceGlimpPlugin;
 import info.nightscout.androidaps.plugins.Source.SourceMM640gPlugin;
 import info.nightscout.androidaps.plugins.Source.SourceNSClientPlugin;
@@ -78,6 +79,7 @@ import info.nightscout.androidaps.plugins.XDripStatusline.StatuslinePlugin;
 import info.nightscout.androidaps.receivers.DataReceiver;
 import info.nightscout.androidaps.receivers.KeepAliveReceiver;
 import info.nightscout.androidaps.receivers.NSAlarmReceiver;
+import info.nightscout.androidaps.receivers.SourceFileReceiver;
 import info.nightscout.androidaps.services.Intents;
 import info.nightscout.utils.FabricPrivacy;
 import info.nightscout.androidaps.plugins.Maintenance.LoggerUtils;
@@ -102,6 +104,7 @@ public class MainApp extends Application {
     private static NSAlarmReceiver alarmReciever = new NSAlarmReceiver();
     private static AckAlarmReceiver ackAlarmReciever = new AckAlarmReceiver();
     private static DBAccessReceiver dbAccessReciever = new DBAccessReceiver();
+    private static SourceFileReceiver sfReciever = new SourceFileReceiver();
     private LocalBroadcastManager lbm;
 
     public static boolean devBranch;
@@ -180,6 +183,7 @@ public class MainApp extends Application {
             pluginsList.add(SourceGlimpPlugin.getPlugin());
             pluginsList.add(SourceDexcomG5Plugin.getPlugin());
             pluginsList.add(SourcePoctechPlugin.getPlugin());
+            pluginsList.add(SourceFilePlugin.getPlugin(this));
             if (Config.SMSCOMMUNICATORENABLED) pluginsList.add(SmsCommunicatorPlugin.getPlugin());
             pluginsList.add(FoodPlugin.getPlugin());
 
@@ -232,6 +236,8 @@ public class MainApp extends Application {
 
         //register dbaccess
         lbm.registerReceiver(dbAccessReciever, new IntentFilter(Intents.ACTION_DATABASE));
+
+        lbm.registerReceiver(sfReciever, new IntentFilter(Intents.ACTION_READ_SF));
     }
 
     private void startKeepAliveService() {
