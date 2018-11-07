@@ -888,6 +888,8 @@
     <string name="closedmodedisabledinpreferences">Uzavretý okruh zakázaný v nastaveniach</string>
     <string name="autosensdisabledinpreferences">Automatická detekcia citlivosti zakázaná v nastaveniach</string>
     <string name="smbdisabledinpreferences">SMB zakázané v nastaveniach</string>
+    <string name="uamdisabledinpreferences">UAM zakázané v nastaveniach</string>
+    <string name="uamdisabledoref1notselected">UAM zakázané, pretože nie je povolený plug-in Oref1</string>
     <string name="limitingbasalratio">Max bazál obmedzený na %1$.2f U/h: %2$s</string>
     <string name="pumplimit">limit pumpy</string>
     <string name="itmustbepositivevalue">požadovaná kladná hodnota</string>
@@ -1050,6 +1052,7 @@
     <string name="insulinlimitviolation">Prekročený limit inzulínu</string>
     <string name="loop_openmode_min_change">Minimálna požiadavka na zmenu [%]</string>
     <string name="loop_openmode_min_change_summary">Uzavretý okruh si vyžiada iba vtedy, ak je zmena väčšia ako táto hodnota. Štandardná hodnota je 20%</string>
+    <string name="pairfirst">Prosím spárujte pumpu s telefónom!</string>
     <plurals name="objective_days">
         <item quantity="one">%1$d deň</item>
         <item quantity="few">%1$d dní</item>
