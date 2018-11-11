@@ -565,10 +565,10 @@ public class SmsCommunicatorPlugin extends PluginBase {
     private void sendSMS(Sms sms) {
         SmsManager smsManager = SmsManager.getDefault();
         sms.text = stripAccents(sms.text);
-        if (sms.text.length() > 140) sms.text = sms.text.substring(0, 139);
+        ArrayList<String> smsparts = smsManager.divideMessage(sms.text);
         try {
             log.debug("Sending SMS to " + sms.phoneNumber + ": " + sms.text);
-            smsManager.sendTextMessage(sms.phoneNumber, null, sms.text, null, null);
+            smsManager.sendMultipartTextMessage(sms.phoneNumber, null, smsparts, null, null);
             messages.add(sms);
         } catch (IllegalArgumentException e) {
             Notification notification = new Notification(Notification.INVALID_PHONE_NUMBER, MainApp.gs(R.string.smscommunicator_invalidphonennumber), Notification.NORMAL);
